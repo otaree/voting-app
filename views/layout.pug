@@ -1,0 +1,36 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title Voting App | #{title}
+    // Bootstrap core CSS
+    link(href='https://getbootstrap.com/dist/css/bootstrap.min.css', rel='stylesheet')
+    // Custom styles for this template
+    link(href='https://getbootstrap.com/docs/4.0/examples/narrow-jumbotron/narrow-jumbotron.css', rel='stylesheet')
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js")
+    script(src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous")
+  body
+    .container
+      header.header.clearfix
+        nav
+          ul.nav.nav-pills.float-right
+            li.nav-item
+              a.nav-link(href='/') Home        
+            li.nav-item
+              a.nav-link(href='/poll') Polls      
+            if !user
+              li.nav-item
+                a.nav-link(href='/auth/login') Login
+            else
+              li.nav-item
+                a.nav-link(href='/profile') Profile
+              li.nav-item
+                a.nav-link(href='/auth/logout') Logout 
+        h3.text-muted #{ title }
+      main(role='main')
+        block content
+        

@@ -1,0 +1,28 @@
+extends layout
+
+block content
+    .container
+        .card.text-white.bg-dark.mb-3.text-center
+            .card-header #{user.username}
+            .card-body
+                h4.card-title #{user.displayName}
+                p.card-text
+                    | Public repository #{user.publicRepo}
+        h2.text-center Polls
+        ul.list-group
+        if polls
+            each poll in polls
+                li.list-group-item(data-id!=poll.id)
+                    .d-inline
+                        a(href=poll.url) #{poll.question} 
+                    .d-inline.float-right
+                        button.close.delete-poll(type="button" aria-label="Close" data-id!=poll.id)
+                            span(aria-hidden="true") ×
+
+        else
+            li.list-group-item No polls
+
+        if user
+            div.text-center
+                a.btn.btn-outline-dark.mt-3(href="/poll/create" role="button") Create poll  
+    script(src="/javascripts/delete-poll.js") 

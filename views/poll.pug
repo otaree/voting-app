@@ -1,0 +1,40 @@
+extends layout
+
+block content
+    if errors
+        ul
+            each error in errors
+                li.alert.alert-danger(role="alert")
+                    | #{error.msg}
+    if notselected
+        .alert.alert-danger(role="alert")
+            | Please select a value
+    .card.text-white.bg-info.mb-3
+        .card-body
+            h4.card-title.question(data-question!=poll.question) #{poll.question}
+            if voted
+                ul.list-group
+                    each option in options
+                        li.card-text.list-group-item.d-flex.justify-content-between.align-items-center.text-dark.options(data-option!=option.name data-vote!=option.vote)
+                            | #{option.name}  
+                            span.badge.badge-primary.badge-pill #{option.vote}
+                    if user
+                        .text-right.mt-2
+                             a.btn.btn-outline-light(href=poll.url+'/update', role="button") Edit
+            else
+                .ml-3
+                    form(method='POST' action='')
+                        each option in options 
+                            .form-check
+                                label.form-check-label
+                                    input.form-check-input.card-text.options(type="radio" name="options" value=option.name data-option!=option.name data-vote!=option.vote)
+                                    |     #{option.name}
+                        .d-inline
+                            button.btn.btn-outline-light(type="submit") Vote
+                        if user
+                            .d-inline.float-right
+                                a.btn.btn-outline-light(href=poll.url+'/update', role="button") Edit
+
+
+    canvas#pie-chart(width="400" height="400")   
+    script(src="/javascripts/script.js")     

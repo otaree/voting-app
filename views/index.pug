@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  .jumbotron
+      h1.display-3=title
+      p.lead
+        | This is a voting app. where you can create polls and vote on a poll. To vote on and to create a poll you need to login with github. But you can check the poll. 
+      
+      div.row
+        div.col-5
+          if !user
+            a.btn.btn-outline-dark(href="/auth/github" role="button") Github
+          else 
+            a.btn.btn-outline-dark(href="/profile" role="button") Profile
+        div.col-2
+        div.col-5
+          a.btn.btn-outline-dark(href="/poll" role="button") Check Polls
+

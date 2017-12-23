@@ -1,0 +1,29 @@
+extends layout
+
+block content
+    if alreadyExist
+        .alert.alert-danger(role="alert")
+            | This poll already exist
+    if errors
+        ul
+            each error in errors
+                li.alert.alert-danger(role="alert")
+                    | #{error.msg}
+    form(method='POST' action='')
+        .form-group
+            label(for="question") Question
+            input#exampleInputEmail1.form-control(type="text" name='question' aria-describedby="questionHelp" required=true placeholder="Enter a poll question")
+            small#questionHelp.form-text.text-muted Enter a question to create a poll
+        .form-group
+            label(for="options") Options
+            input#option1.form-control(type="text" name='option_1' required=true placeholder="Option 1")
+        .form-group
+            input#option2.form-control.optionNo(type="text" name='option_2' data-optionNo=2 required=true  placeholder="Option 2" data-optNo="option2")
+        .text-left
+            a.add-option(href="#")
+                i.fa.fa-plus(aria-hidden="true")
+
+        .text-center
+            button.btn.btn-primary.text-center(type="submit") Submit
+    script(src="/javascripts/add-option.js")   
+

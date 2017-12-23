@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    .list-group
+    if polls
+        each poll in polls
+            a.list-group-item.list-group-item-action.text-center(href=poll.url) #{poll.question}
+    else
+        a.list-group-item.list-group-item-action.text-center(href='#') No polls
+
+        
