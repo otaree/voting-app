@@ -12,6 +12,11 @@ block content
     .card.text-white.bg-info.mb-3
         .card-body
             h4.card-title.question(data-question!=poll.question) #{poll.question}
+                if user 
+                    a.share(href="#" target="_blank" data-home!=home data-pollurl!=poll.url)
+                        span.fa-stack
+                            i.fa.fa-square-o.fa-stack-2x
+                            i.fa.fa-twitter.fa-stack-1x
             if voted
                 ul.list-group
                     each option in options

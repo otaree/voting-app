@@ -9,5 +9,8 @@ module.exports = {
     },
     session: {
         cookieKey: process.env.COOKIE_KEY
+    },
+    home: {
+        url: process.env.APP_URL
     }
-}
+};

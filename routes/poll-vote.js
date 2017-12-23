@@ -5,6 +5,7 @@ var PollInstance = require('../models/pollInstance');
 var Option = require('../models/options');
 var async = require('async');
 var isLoggedIn = require('../common/auth_function');
+var keys = require('../config/keys');
 
 
 
@@ -123,7 +124,6 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', isLoggedIn, function (req, res, next) {
-    console.log(req.body);
 
     async.parallel([
         function (callback) {
@@ -282,6 +282,7 @@ router.get('/:id', function (req, res, next) {
                 options: options,
                 user: req.user,
                 voted: voted,
+                home: keys.home.url,
                 title: "Cast Vote"
             });
         });
@@ -303,8 +304,6 @@ router.get('/:id', function (req, res, next) {
             voted = [{voted: false, pollId: req.params.id}];
         }
         voted = voted[0].voted;
-        console.log("session:::::", req.session);
-        console.log("VOTED", voted);
         async.parallel({
             poll: function (callback) {
                 Polls.findById(req.params.id)
@@ -332,6 +331,7 @@ router.get('/:id', function (req, res, next) {
                 options: options,
                 user: req.user,
                 voted: voted,
+                home: keys.home.url,
                 title: "Cast Vote"
             });
         });
@@ -392,6 +392,7 @@ router.post('/:id', function (req, res, next) {
                             poll: poll,
                             options: options,
                             user: req.user,
+                            home: keys.home.url,
                             voted: voted
                         });
                     });
@@ -402,7 +403,6 @@ router.post('/:id', function (req, res, next) {
             if (req.session.poll) {
                 for (var i = 0; i < req.session.poll.length; i++) {
                     if (req.session.poll[i]["pollId"] === req.params.id) {
-                        console.log(req.session.poll[i]["voted"]);
                         req.session.poll[i]["voted"] = true;
                     }
                 }
@@ -444,6 +444,7 @@ router.post('/:id', function (req, res, next) {
                             poll: poll,
                             options: options,
                             voted: voted,
+                            home: keys.home.url,
                             title: "Cast Vote"
                         });
                     });
@@ -479,6 +480,7 @@ router.post('/:id', function (req, res, next) {
                 user: req.user,
                 voted: false,
                 notselected: true,
+                home: keys.home.url,
                 title: "Cast Vote"
             });
         });
